@@ -27,9 +27,15 @@ func parseTraining(data string) (int, string, time.Duration, error) {
 	if err != nil {
 		return 0, "", 0, err
 	}
+	if steps <= 0 {
+		return 0, "", 0, fmt.Errorf("количество шагов должно быть больше нуля")
+	}
 	time, err := time.ParseDuration(parse[2])
 	if err != nil {
 		return 0, "", 0, err
+	}
+	if time <= 0 { // ← И ЭТОГО
+		return 0, "", 0, fmt.Errorf("продолжительность должна быть больше нуля")
 	}
 	// вид активности
 	activ := parse[1]
@@ -47,7 +53,7 @@ func distance(steps int, height float64) float64 {
 
 func meanSpeed(steps int, height float64, duration time.Duration) float64 {
 	// TODO: реализовать функцию
-	if duration < 0 {
+	if duration <= 0 {
 		return 0
 	}
 	// находим дистанцию
@@ -80,7 +86,7 @@ func TrainingInfo(data string, weight, height float64) (string, error) {
 		return "", fmt.Errorf("неизвестный тип тренировки")
 	}
 	return fmt.Sprintf(
-		"Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f",
+		"Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f\n",
 		activ, time.Hours(), dist, speed, calories,
 	), nil
 
@@ -89,17 +95,17 @@ func TrainingInfo(data string, weight, height float64) (string, error) {
 func RunningSpentCalories(steps int, weight, height float64, duration time.Duration) (float64, error) {
 	// TODO: реализовать функцию
 	// проверка что шагов не отрицательное кол-во
-	if steps < 0 {
+	if steps <= 0 {
 		return 0, fmt.Errorf("Не может быть отрицательное число шагов")
 	}
 	// такие же проверки проводим с весом и ростом и временем
-	if weight < 0 {
+	if weight <= 0 {
 		return 0, fmt.Errorf("Не может быть отрицательное число веса")
 	}
-	if height < 0 {
+	if height <= 0 {
 		return 0, fmt.Errorf("Не может быть отрицательное число роста")
 	}
-	if duration < 0 {
+	if duration <= 0 {
 		return 0, fmt.Errorf("Не может быть отрицательное число времени")
 	}
 	// рассчитываем среднюю скорость
@@ -112,17 +118,17 @@ func RunningSpentCalories(steps int, weight, height float64, duration time.Durat
 
 func WalkingSpentCalories(steps int, weight, height float64, duration time.Duration) (float64, error) {
 	// TODO: реализовать функцию
-	if steps < 0 {
+	if steps <= 0 {
 		return 0, fmt.Errorf("Не может быть отрицательное число шагов")
 	}
 	// такие же проверки проводим с весом и ростом и временем
-	if weight < 0 {
+	if weight <= 0 {
 		return 0, fmt.Errorf("Не может быть отрицательное число веса")
 	}
-	if height < 0 {
+	if height <= 0 {
 		return 0, fmt.Errorf("Не может быть отрицательное число роста")
 	}
-	if duration < 0 {
+	if duration <= 0 {
 		return 0, fmt.Errorf("Не может быть отрицательное число времени")
 	}
 	// рассчитываем среднюю скорость

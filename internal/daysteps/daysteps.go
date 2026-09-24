@@ -48,7 +48,7 @@ func DayActionInfo(data string, weight, height float64) string {
 		fmt.Println(err)
 		return ""
 	}
-	if steps < 0 {
+	if steps <= 0 {
 		return ""
 	}
 	// дистанция в метрах
@@ -60,7 +60,7 @@ func DayActionInfo(data string, weight, height float64) string {
 		return ""
 	}
 	return fmt.Sprintf(
-		"Количество шагов: %d. \nДистанция составила %.2f км. \nВы сожгли %.2f ккал.",
+		"Количество шагов: %d.\nДистанция составила %.2f км.\nВы сожгли %.2f ккал.\n",
 		steps, distanceKilometr, calories,
 	)
 
