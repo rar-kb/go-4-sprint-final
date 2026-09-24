@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/rar-kb/go-4-sprint-final/internal/spentcalories"
+	"github.com/Yandex-Practicum/tracker/internal/spentcalories"
 )
 
 const (
