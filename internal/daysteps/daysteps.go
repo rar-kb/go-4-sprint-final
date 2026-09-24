@@ -29,11 +29,14 @@ func parsePackage(data string) (int, time.Duration, error) {
 		return 0, 0, err
 	}
 	// проверяем что шагов больше 0
-	if steps < 0 {
+	if steps <= 0 {
 		return 0, 0, fmt.Errorf("Количество шагов не может быть отрицательным")
 	}
 	// время
 	time, err := time.ParseDuration(parse[1])
+	if time <= 0 {
+		return 0, 0, fmt.Errorf("продолжительность должна быть больше нуля")
+	}
 	if err != nil {
 		return 0, 0, err
 	}
